@@ -1,0 +1,10 @@
+applications:
+- name: licences-chatbot-2018
+  command: npm start
+  path: .
+  memory: 256M
+  instances: 1
+  domain: mybluemix.net
+  host: licences-chatbot-2018
+  random-route: true
+  disk_quota: 1024M
