@@ -4,8 +4,8 @@ var recognizeMicrophone = require('watson-speech/speech-to-text/recognize-microp
 var SpeechToText = require('watson-developer-cloud/speech-to-text/v1');
 var WebSocket = require('websocket').client;
 const AuthorizationV1 = require('watson-developer-cloud/authorization/v1');
-var LineIn = require('line-in'); // the `mic` package also works - it's more flexible but requires a bit more setup
-var wav = require('wav');
+// var LineIn = require('line-in'); // the `mic` package also works - it's more flexible but requires a bit more setup
+// var wav = require('wav');
 
 const serviceUrl = process.env.SPEECH_URL || 'https://stream.watsonplatform.net/speech-to-text/api';
 
@@ -25,7 +25,6 @@ exports.sendResponse = function (req, res) {
         token,
         serviceUrl,
       };
-    console.log("TOKEN: --> ", token)
     res.json(credentials);
     }
   });
@@ -50,22 +49,22 @@ exports.sendResponse = function (req, res) {
 //   websocket.send(JSON.stringify(message));
 // }
 
-var lineIn = new LineIn(); // 2-channel 16-bit little-endian signed integer pcm encoded audio @ 44100 Hz
+// var lineIn = new LineIn(); // 2-channel 16-bit little-endian signed integer pcm encoded audio @ 44100 Hz
 
-var wavStream = new wav.Writer({
-  sampleRate: 44100,
-  channels: 2,
-});
+// var wavStream = new wav.Writer({
+//   sampleRate: 44100,
+//   channels: 2,
+// });
 
-var recognizeStream = speechToText.createRecognizeStream({
-  content_type: 'audio/wav',
-  interim_results: true,
-  model: 'es-ES_BroadbandModel'
-})
-console.log(typeof window);
-lineIn.pipe(wavStream);
+// var recognizeStream = speechToText.createRecognizeStream({
+//   content_type: 'audio/wav',
+//   interim_results: true,
+//   model: 'es-ES_BroadbandModel'
+// })
+// console.log(typeof window);
+// lineIn.pipe(wavStream);
 
-wavStream.pipe(recognizeStream);
+// wavStream.pipe(recognizeStream);
 
 // exports.sendResponse = function (req, res) {
 //   console.log(typeof window)

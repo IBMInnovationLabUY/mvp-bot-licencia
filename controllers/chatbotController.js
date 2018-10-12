@@ -81,8 +81,6 @@ exports.sendResponse = function (req, res) {
       db.find_employee(datos, function(error, resultado){
 
         if (resultado){
-          console.log(resultado);
-          console.log(total)
           available_days = resultado;
           if (resultado - total < 0){
             if (resultado == 0 && total >= 0){
@@ -93,7 +91,6 @@ exports.sendResponse = function (req, res) {
             data.context.startDate = null;
             data.context.endDate = null;
             data.context.sinDias = 'true'
-            console.log("Entre");
             data.context.cedulaIdentidad = null;
           }
         }
@@ -115,11 +112,7 @@ exports.sendResponse = function (req, res) {
 
           let sendText = [`Tu solicitud fue confirmada y se le asigno el codigo ${resultado}`]
           let cant_dias = available_days - total;
-          console.log(available_days);
-          console.log(total);
-          console.log(cant_dias);
           cant_dias = cant_dias.toString()
-          console.log(cant_dias);
           var update = {
             document_id: data.context.cedulaIdentidad,
             available_days: cant_dias

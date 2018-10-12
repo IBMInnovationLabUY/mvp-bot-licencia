@@ -27,12 +27,10 @@ var Api = (function() {
       responsePayload = JSON.parse(newPayloadStr);
     },
     getCredentials: function() {
-      console.log(credentials);
       return credentials;
     },
     setCredentials: function(newCredentials) {
       credentials = JSON.parse(newCredentials)
-      console.log(credentials)
     }
     // ,
     // getWaiting: function() {
