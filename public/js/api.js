@@ -82,8 +82,6 @@ var Api = (function() {
     // Api.setWaiting(true);
     http.onreadystatechange = function() {
       if (http.readyState === 4 && http.status === 200 && http.responseText) {
-        console.log(http.responseText);
-
         Api.setCredentials(http.responseText);
       }
     };

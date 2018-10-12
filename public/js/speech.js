@@ -44,7 +44,9 @@ var Speech = (function () {
 
   function stopRecording() {
     document.getElementById("textInput").focus();
-    stream.stop();
+    if (stream){
+      stream.stop();
+    }
   }
 
 }())

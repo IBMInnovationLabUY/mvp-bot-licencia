@@ -10,8 +10,8 @@ const AuthorizationV1 = require('watson-developer-cloud/authorization/v1');
 const serviceUrl = process.env.SPEECH_URL || 'https://stream.watsonplatform.net/speech-to-text/api';
 
 var speechToText = new SpeechToText({
-  username: '78d5a6c0-3a43-4cc7-8abd-7c915b62b578' || '{username}',
-  password: 'CretOpZGjJGb' || '{password}',
+  username: '6a26a484-f1b0-4678-86f1-b121074bd7c7' || '{username}',
+  password: 'HfNtgvVPN78s' || '{password}',
   url: serviceUrl
 });
 
