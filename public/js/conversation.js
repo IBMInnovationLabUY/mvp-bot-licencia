@@ -28,6 +28,7 @@ var ConversationPanel = (function () {
   function init() {
     chatUpdateSetup();
     Api.sendRequest('', null);
+    Api.sendSpeech('', null);
     setupInputBox();
   }
   // Set up callbacks on payload setters in Api module
@@ -265,6 +266,7 @@ var ConversationPanel = (function () {
   function inputKeyDown(event, inputBox) {
     // Submit on enter key, dis-allowing blank messages
     if (event.keyCode === 13 && inputBox.value) {
+      Speech.stopRecording();
       sendMessage(inputBox.value);
       // Clear input box for further messages
       inputBox.value = '';

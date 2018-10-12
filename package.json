@@ -21,13 +21,21 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
+    "ajv": "^6.5.4",
     "body-parser": "^1.18.3",
     "cfenv": "^1.1.0",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
+    "fs": "0.0.1-security",
+    "line-by-line": "^0.1.6",
+    "line-in": "^0.1.2",
     "mongoose": "^5.3.1",
+    "node-gyp": "^3.8.0",
     "pg": "^6.4.2",
-    "watson-developer-cloud": "^3.7.0"
+    "watson-developer-cloud": "^3.7.0",
+    "watson-speech": "^0.35.1",
+    "wav": "^1.0.2",
+    "websocket": "^1.0.28"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

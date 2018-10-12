@@ -23,6 +23,7 @@ var bodyParser = require('body-parser'); // parser for post requests
 var AssistantV1 = require('watson-developer-cloud/assistant/v1'); // watson sdk
 
 var chatbot = require('./controllers/chatbotController');
+var speech = require('./controllers/speechController');
 
 var app = express();
 
@@ -33,6 +34,7 @@ var db = require('./db');
 
 
 app.post('/api/message', chatbot.sendResponse);
+app.get('/api/speech', speech.sendResponse);
 
 
 module.exports = app;

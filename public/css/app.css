@@ -237,7 +237,7 @@ input:-moz-placeholder {
 }
 
 .inputOutline {
-  display: block;
+  display: flex;
   border-bottom: 0.0625rem solid #aeaeae;
   margin-left: 0.5rem;
   margin-right: 0.5rem;

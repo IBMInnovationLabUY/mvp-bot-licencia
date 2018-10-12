@@ -4,11 +4,13 @@ var Api = (function() {
   var requestPayload;
   var responsePayload;
   var messageEndpoint = '/api/message';
+  var speechEndpoint = '/api/speech'
   // var waiting = false;
 
   // Publicly accessible methods defined
   return {
     sendRequest: sendRequest,
+    sendSpeech: sendSpeech,
 
     // The request/response getters/setters are defined here to prevent internal methods
     // from calling the methods without any of the callbacks that are added elsewhere.
@@ -23,6 +25,14 @@ var Api = (function() {
     },
     setResponsePayload: function(newPayloadStr) {
       responsePayload = JSON.parse(newPayloadStr);
+    },
+    getCredentials: function() {
+      console.log(credentials);
+      return credentials;
+    },
+    setCredentials: function(newCredentials) {
+      credentials = JSON.parse(newCredentials)
+      console.log(credentials)
     }
     // ,
     // getWaiting: function() {
@@ -65,4 +75,23 @@ var Api = (function() {
     // Send request
     http.send(params);
   }
+
+  function sendSpeech(text, context) {
+    // Built http request
+    var http = new XMLHttpRequest();
+    http.open('GET', speechEndpoint, true);
+    // http.setRequestHeader('Content-type', 'application/json');
+    // Api.setWaiting(true);
+    http.onreadystatechange = function() {
+      if (http.readyState === 4 && http.status === 200 && http.responseText) {
+        console.log(http.responseText);
+
+        Api.setCredentials(http.responseText);
+      }
+    };
+    // Send request
+    http.send("");
+  }
+
+
 }());

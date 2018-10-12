@@ -3,7 +3,9 @@
 
 var db = require('../db');
 
-var AssistantV1 = require('watson-developer-cloud/assistant/v1'); // watson sdk
+var AssistantV1 = require('watson-developer-cloud/assistant/v1');
+// var SpeechToTextV1 = require('watson-developer-cloud/speech-to-text/v1');
+
 
 var assistant = new AssistantV1({
   version: '2018-07-10'
