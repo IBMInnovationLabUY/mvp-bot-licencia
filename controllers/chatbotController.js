@@ -1,17 +1,29 @@
 'use strict';
 
+const cfenv = require("cfenv");
 
 var db = require('../db');
+var vcapLocal;
+try {
+  vcapLocal = require('../vcap/chatbot-licences_vcap.json');
+} catch (e) {
+  console.log("error: ", e);
+}
+console.log(vcapLocal);
+const appEnvOpts = vcapLocal ? { vcap: vcapLocal }: {}
+const appEnv = cfenv.getAppEnv(appEnvOpts);
+
+console.log(appEnv);
+console.log(appEnvOpts);
 
 var AssistantV1 = require('watson-developer-cloud/assistant/v1');
-// var SpeechToTextV1 = require('watson-developer-cloud/speech-to-text/v1');
-
-
 var assistant = new AssistantV1({
-  version: '2018-07-10'
+  version: '2018-07-10',
+  username: appEnv.services.conversation[0].credentials.username,
+  password: appEnv.services.conversation[0].credentials.password,
+  url: appEnv.services.conversation[0].credentials.url
 });
 
-var checked = false;
 var available_days = 0;
 var total = 0;
 

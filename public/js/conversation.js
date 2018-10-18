@@ -273,4 +273,6 @@ var ConversationPanel = (function () {
       Common.fireEvent(inputBox, 'input');
     }
   }
+
+
 }());

@@ -1,6 +1,6 @@
 #!/usr/bin/env
 /**
- * Copyright 2015 IBM Corp. All Rights Reserved.
+ * Copyright 2018 DIEGO VERDIER. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,19 +19,21 @@
 
 require('dotenv').config({silent: true});
 
+var cfenv   = require('cfenv');
+var appEnv = cfenv.getAppEnv();
+
 var db = require('./db');
 var uri = 'mongodb+srv://dverdier:9cUEGQRcwrrH2jJ@cluster0-sbwe9.mongodb.net/test?retryWrites=true';
-var server = require('./app'),
-  port = process.env.PORT || 4000
+var server = require('./app')
 
 db.connect(uri, function(err) {
   if (err) {
     console.log('Unable to connect to Mongo.')
     process.exit(1)
   } else {
-    server.listen(port, function() {
+    server.listen(appEnv.port, appEnv.bind, function() {
       // eslint-disable-next-line
-      console.log('Server running on port: %d', port);
+      console.log('Server running on port: %d', appEnv.port);
     });
   }
 })

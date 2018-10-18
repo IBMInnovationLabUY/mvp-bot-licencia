@@ -1,0 +1,20 @@
+{
+  "name": "bower_components",
+  "homepage": "https://github.com/IBMInnovationLabUY/mvp-bot-licencia",
+  "authors": [
+    "Diego Verdier Bemposta <dverdier@igv.com.uy"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "watson-speech": "^0.36.0"
+  }
+}

@@ -1,19 +1,40 @@
 'use strict';
-require('dotenv').config({ silent: true }); // optional, handy for local development
-var recognizeMicrophone = require('watson-speech/speech-to-text/recognize-microphone');
+
 var SpeechToText = require('watson-developer-cloud/speech-to-text/v1');
-var WebSocket = require('websocket').client;
 const AuthorizationV1 = require('watson-developer-cloud/authorization/v1');
-// var LineIn = require('line-in'); // the `mic` package also works - it's more flexible but requires a bit more setup
-// var wav = require('wav');
 
-const serviceUrl = process.env.SPEECH_URL || 'https://stream.watsonplatform.net/speech-to-text/api';
+// const cfenv = require("cfenv");
 
+// var db = require('../db');
+// var vcapLocal;
+// try {
+//   vcapLocal = require('../vcap/speech2text-licences_vcap.json');
+// } catch (e) {
+//   console.log("error: ", e);
+// }
+
+// const appEnvOpts = vcapLocal ? { vcap: vcapLocal }: {}
+// const appEnv = cfenv.getAppEnv(appEnvOpts);
+
+// var SpeechToText = require('watson-developer-cloud/speech-to-text/v1');
+// const AuthorizationV1 = require('watson-developer-cloud/authorization/v1');
+
+// var AssistantV1 = require('watson-developer-cloud/assistant/v1');
+// var assistant = new AssistantV1({
+//   version: '2018-07-10',
+//   username: appEnv.VCAP_SERVICES.speech_to_text[0].credentials.username,
+//   password: appEnv.VCAP_SERVICES.speech_to_text[0].credentials.password,
+//   url: appEnv.VCAP_SERVICES.speech_to_text[0].credentials.url
+// });
+
+
+var url = process.env.SPEECH_URL || '{url}';
 var speechToText = new SpeechToText({
-  username: '6a26a484-f1b0-4678-86f1-b121074bd7c7' || '{username}',
-  password: 'HfNtgvVPN78s' || '{password}',
-  url: serviceUrl
+  username: process.env.SPEECH_USERNAME || '{username}',
+  password: process.env.SPEECH_PASSWORD || '{password}',
+  url: url
 });
+
 
 exports.sendResponse = function (req, res) {
   var tokenManager = new AuthorizationV1(speechToText.getCredentials());
@@ -23,51 +44,9 @@ exports.sendResponse = function (req, res) {
     } else {
       var credentials = {
         token,
-        serviceUrl,
+        url,
       };
     res.json(credentials);
     }
   });
 }
-
-
-// var model = 'es-ES_BroadbandModel';
-// var wsURI = 'wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize'
-//   + '?watson-token=' + token
-//   + '&model=' + model;
-// var websocket = new WebSocket(wsURI);
-// websocket.onopen = function(evt) { onOpen(evt) };
-// websocket.onclose = function(evt) { onClose(evt) };
-// websocket.onmessage = function(evt) { onMessage(evt) };
-// websocket.onerror = function(evt) { onError(evt) };
-
-// function onOpen(evt) {
-//   var message = {
-//     'action': 'start',
-//     'content-type': 'audio/l16;rate=22050'
-//   };
-//   websocket.send(JSON.stringify(message));
-// }
-
-// var lineIn = new LineIn(); // 2-channel 16-bit little-endian signed integer pcm encoded audio @ 44100 Hz
-
-// var wavStream = new wav.Writer({
-//   sampleRate: 44100,
-//   channels: 2,
-// });
-
-// var recognizeStream = speechToText.createRecognizeStream({
-//   content_type: 'audio/wav',
-//   interim_results: true,
-//   model: 'es-ES_BroadbandModel'
-// })
-// console.log(typeof window);
-// lineIn.pipe(wavStream);
-
-// wavStream.pipe(recognizeStream);
-
-// exports.sendResponse = function (req, res) {
-//   console.log(typeof window)
-// }
-
-// recognizeStream.pipe(process.stdout);
