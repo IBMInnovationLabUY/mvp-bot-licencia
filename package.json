@@ -23,12 +23,12 @@
   "dependencies": {
     "ajv": "^6.5.4",
     "body-parser": "^1.18.3",
+    "botkit": "^0.6.18",
     "cfenv": "^1.1.0",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "fs": "0.0.1-security",
     "line-by-line": "^0.1.6",
-    "line-in": "^0.1.2",
     "mongoose": "^5.3.1",
     "node-gyp": "^3.8.0",
     "pg": "^6.4.2",

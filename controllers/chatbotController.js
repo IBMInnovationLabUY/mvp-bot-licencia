@@ -9,12 +9,8 @@ try {
 } catch (e) {
   console.log("error: ", e);
 }
-console.log(vcapLocal);
 const appEnvOpts = vcapLocal ? { vcap: vcapLocal }: {}
 const appEnv = cfenv.getAppEnv(appEnvOpts);
-
-console.log(appEnv);
-console.log(appEnvOpts);
 
 var AssistantV1 = require('watson-developer-cloud/assistant/v1');
 var assistant = new AssistantV1({
@@ -30,11 +26,15 @@ var total = 0;
 exports.sendResponse = function (req, res) {
   var workspace = process.env.WORKSPACE_ID || '<workspace-id>';
   if (!workspace || workspace === '<workspace-id>') {
-    return res.json({
+    var answer = {
       'output': {
         'text': 'The app has not been configured with a <b>WORKSPACE_ID</b> environment variable. Please refer to the ' + '<a href="https://github.com/watson-developer-cloud/assistant-simple">README</a> documentation on how to set this variable. <br>' + 'Once a workspace has been defined the intents may be imported from ' + '<a href="https://github.com/watson-developer-cloud/assistant-simple/blob/master/training/car_workspace.json">here</a> in order to get a working application.'
       }
-    });
+    }
+    if (req.slackBot === 'true'){
+      return res(answer);
+    }
+    return res.json(answer);
   }
   var payload = {
     workspace_id: workspace,
@@ -107,6 +107,9 @@ exports.sendResponse = function (req, res) {
           }
         }
         var answer = updateMessage(payload, data);
+        if (req.slackBot === 'true'){
+          return res(answer);
+        }
         return res.json(answer);
       })
     }
@@ -141,6 +144,9 @@ exports.sendResponse = function (req, res) {
           data.context.fullName = null;
 
           var answer = updateMessage(payload, data);
+          if (req.slackBot === 'true'){
+            return res(answer);
+          }
           return res.json(answer);
         });
       }else{
@@ -151,6 +157,9 @@ exports.sendResponse = function (req, res) {
         data.context.endDate = null;
         data.context.fullName = null;
         var answer = updateMessage(payload, data);
+        if (req.slackBot === 'true'){
+          return res(answer);
+        }
         return res.json(answer);
       }
     }
@@ -178,6 +187,9 @@ exports.sendResponse = function (req, res) {
 
           data.output.text = message
           var answer = updateMessage(payload, data);
+          if (req.slackBot === 'true'){
+            return res(answer);
+          }
           return res.json(answer);
         });
       }
@@ -199,6 +211,9 @@ exports.sendResponse = function (req, res) {
             data.context.cedulaConsulta = null;
             data.context.consultarDias = null;
             var answer = updateMessage(payload, data);
+            if (req.slackBot === 'true'){
+              return res(answer);
+            }
             return res.json(answer);
           }
         })
@@ -206,6 +221,9 @@ exports.sendResponse = function (req, res) {
     }
     else {
       var answer = updateMessage(payload, data);
+      if (req.slackBot === 'true'){
+        return res(answer);
+      }
       return res.json(answer);
     }
   });

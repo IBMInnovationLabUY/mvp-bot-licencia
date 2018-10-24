@@ -26,6 +26,7 @@ var AssistantV1 = require('watson-developer-cloud/assistant/v1'); // watson sdk
 
 var chatbot = require('./controllers/chatbotController');
 var speech = require('./controllers/speechController');
+var slack = require('./controllers/slackbotController');
 
 var app = express();
 
