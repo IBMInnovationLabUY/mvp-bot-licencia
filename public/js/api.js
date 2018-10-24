@@ -32,13 +32,6 @@ var Api = (function() {
     setCredentials: function(newCredentials) {
       credentials = JSON.parse(newCredentials)
     }
-    // ,
-    // getWaiting: function() {
-    //   return waiting;
-    // },
-    // setWaiting: function(newWaitingvalue) {
-    //   responsePayload = newWaitingvalue;
-    // }
   };
 
   function sendRequest(text, context) {
@@ -56,11 +49,9 @@ var Api = (function() {
     var http = new XMLHttpRequest();
     http.open('POST', messageEndpoint, true);
     http.setRequestHeader('Content-type', 'application/json');
-    // Api.setWaiting(true);
     http.onreadystatechange = function() {
       if (http.readyState === 4 && http.status === 200 && http.responseText) {
         Api.setResponsePayload(http.responseText);
-        // Api.setWaiting(false);
       }
     };
 
@@ -79,7 +70,6 @@ var Api = (function() {
     var http = new XMLHttpRequest();
     http.open('GET', speechEndpoint, true);
     // http.setRequestHeader('Content-type', 'application/json');
-    // Api.setWaiting(true);
     http.onreadystatechange = function() {
       if (http.readyState === 4 && http.status === 200 && http.responseText) {
         Api.setCredentials(http.responseText);
@@ -88,6 +78,5 @@ var Api = (function() {
     // Send request
     http.send("");
   }
-
 
 }());

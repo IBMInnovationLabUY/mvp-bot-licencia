@@ -9,9 +9,12 @@ var Speech = (function () {
   function startRecording() {
     document.getElementById("textInput").focus();
     stream = WatsonSpeech.SpeechToText.recognizeMicrophone({
+      url: 'wss://stream.watsonplatform.net/speech-to-text/api',
       token: Api.getCredentials().token,
-      model: 'es-ES_BroadbandModel',
-      outputElement: '#textInput'
+      model: 'es-ES_NarrowbandModel',
+      outputElement: '#textInput',
+      customization_id: Api.getCredentials().customization_id
+      // acoustic_customization:id :
     });
 
     stream.on('error', function(err) {
@@ -19,7 +22,7 @@ var Speech = (function () {
     })
 
     stream.on('data', function(data) {
-      console.log(data);
+      console.log(data.results[0].alternatives[0].transcript);
     })
 
   }

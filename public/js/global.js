@@ -7,5 +7,5 @@
   // Initialize all modules
   console.log(typeof window);
   ConversationPanel.init();
-  // PayloadPanel.init();
+
 })();

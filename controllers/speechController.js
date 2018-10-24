@@ -35,6 +35,7 @@ var speechToText = new SpeechToText({
   url: url
 });
 
+var customization_id = process.env.SPEECH_CUSTOMIZATION_ID || '{customization_id}';
 
 exports.sendResponse = function (req, res) {
   var tokenManager = new AuthorizationV1(speechToText.getCredentials());
@@ -45,6 +46,7 @@ exports.sendResponse = function (req, res) {
       var credentials = {
         token,
         url,
+        customization_id
       };
     res.json(credentials);
     }
