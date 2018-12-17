@@ -15,9 +15,8 @@ const appEnv = cfenv.getAppEnv(appEnvOpts);
 var AssistantV1 = require('watson-developer-cloud/assistant/v1');
 var assistant = new AssistantV1({
   version: '2018-07-10',
-  username: appEnv.services.conversation[0].credentials.username,
-  password: appEnv.services.conversation[0].credentials.password,
-  url: appEnv.services.conversation[0].credentials.url
+  iam_apikey: appEnv.services.conversation[0].credentials.apikey,
+  url: appEnv.services.conversation[0].credentials.url,
 });
 
 var available_days = 0;
